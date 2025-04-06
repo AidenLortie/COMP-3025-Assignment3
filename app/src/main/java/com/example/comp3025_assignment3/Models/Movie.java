@@ -1,14 +1,25 @@
 package com.example.comp3025_assignment3.Models;
 
-public class Movie {
-    public String title, studio, poster, rating, description;
+import androidx.annotation.NonNull;
 
-    public Movie(String title, String studio, String poster, String rating, String description) {
-        this.title = title;
-        this.studio = studio;
-        this.poster = poster;
-        this.rating = rating;
-        this.description = description;
+public class Movie {
+    // Movie Class (Used by MovieView)
+    private String title;
+    private String year;
+    private String rated;
+    private String released;
+    private String genre;
+    private String plot;
+    private String poster;
+
+    public Movie(){
+
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Summary: \n" + plot + "\nGenre: " + genre + "\nRated: " + rated;
     }
 
     public String getTitle() {
@@ -19,12 +30,44 @@ public class Movie {
         this.title = title;
     }
 
-    public String getStudio() {
-        return studio;
+    public String getYear() {
+        return year;
     }
 
-    public void setStudio(String studio) {
-        this.studio = studio;
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getRated() {
+        return rated;
+    }
+
+    public void setRated(String rated) {
+        this.rated = rated;
+    }
+
+    public String getReleased() {
+        return released;
+    }
+
+    public void setReleased(String released) {
+        this.released = released;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
     }
 
     public String getPoster() {
@@ -33,21 +76,5 @@ public class Movie {
 
     public void setPoster(String poster) {
         this.poster = poster;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
