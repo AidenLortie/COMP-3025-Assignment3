@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.InputStream;
@@ -32,7 +33,8 @@ public class ImageDownloader {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     imageView.setImageBitmap(bitmap);
                 });
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                Log.e("ImageDownloader", "Error loading image: " + e.getMessage());
                 // Since there is a default image in the XML, this exception can be ignored.
             }
         }).start(); // Start the thread
