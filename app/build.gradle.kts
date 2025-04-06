@@ -6,9 +6,6 @@ android {
     namespace = "com.example.comp3025_assignment3"
     compileSdk = 35
 
-    buildFeatures{
-        viewBinding = true
-    }
     defaultConfig {
         applicationId = "com.example.comp3025_assignment3"
         minSdk = 35
@@ -17,6 +14,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        viewBinding = true
     }
 
     buildTypes {
