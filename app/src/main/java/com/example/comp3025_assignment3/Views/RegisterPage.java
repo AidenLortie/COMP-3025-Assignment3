@@ -47,7 +47,7 @@ public class RegisterPage extends AppCompatActivity {
             public void onClick(View view) {
                 String email = binding.emailRegister.getText().toString().trim();
                 String confirmPassword = binding.passwordConfirm.getText().toString().trim();
-                String password = binding.passwordRegister.getText().toString().trim();
+                String password = binding.passwordRegister.getEditText().getText().toString().trim();
 
                 if (email.isEmpty()) { //no email entered
                     Toast.makeText(RegisterPage.this, "Email is required", Toast.LENGTH_SHORT).show();
