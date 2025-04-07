@@ -1,5 +1,6 @@
 package com.example.comp3025_assignment3.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,15 +61,8 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
 
     @Override
     public void onClick(View view, int pos) {
-        // Handle item click
-        MovieSearch movie = movies.get(pos);
-        String title = movie.getTitle();
-        String year = movie.getYear();
-        String poster = movie.getPoster();
-
-        // Show a toast message with the movie details
-        Toast.makeText(this, "Title: " + title + "\nYear: " + year + "\nPoster: " + poster, Toast.LENGTH_SHORT).show();
-
-        // You can also start a new activity or perform any other action here
+        Intent intObj = new Intent(this, MovieView.class);
+        intObj.putExtra("MOVIE_ID", movies.get(pos).getImdbID());
+        startActivity(intObj);
     }
 }
