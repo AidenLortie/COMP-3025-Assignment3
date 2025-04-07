@@ -33,9 +33,9 @@ public class RegisterPage extends AppCompatActivity {
                 registerUser("test@testing.ca", "password");
             }
         });*/
-        String email = String.valueOf(binding.emailRegister);
-        String confirmPassword = String.valueOf(binding.passwordConfirm);
-        String password = String.valueOf(binding.passwordRegister);
+        String email = binding.emailRegister.getText().toString().trim();
+        String confirmPassword = binding.passwordConfirm.getText().toString().trim();
+        String password = binding.passwordRegister.getText().toString().trim();
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
