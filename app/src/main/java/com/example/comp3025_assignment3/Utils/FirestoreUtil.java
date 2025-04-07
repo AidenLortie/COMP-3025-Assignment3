@@ -14,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +72,9 @@ public class FirestoreUtil {
                 .addOnFailureListener(e -> Log.w("FirestoreUtil", "Error deleting favourite", e));
     }
 
-    public List<Movie> getFavourites(String userId) {
+    public void getFavourites(String userId, FirestoreCallback<List<Movie>> callback) {
 
-        List<Movie> favourites = List.of();
+        ArrayList<Movie> favourites = new ArrayList<>();
         db.collection("favourites")
                 .whereEqualTo("userId", userId)
                 .get()
@@ -106,9 +108,12 @@ public class FirestoreUtil {
                                     movie.setPlot(json.getString("Plot"));
                                     movie.setPoster(json.getString("Poster"));
 
-                                    // Add movie to favourites list
-                                    favourites.add(movie);
-                                    return;
+                                    synchronized (favourites) {
+                                        favourites.add(movie);
+                                        if( favourites.size() == task.getResult().size()){
+                                            callback.onCallback(favourites);
+                                        }
+                                    }
 
                                 } catch(JSONException e) {
                                     throw new RuntimeException(e);
@@ -117,11 +122,9 @@ public class FirestoreUtil {
                         });
                     }
                 });
-
-        return favourites;
     }
 
-    public Movie getFavourite(String userId, String movieId) {
+    public void getFavourite(String userId, String movieId, FirestoreCallback<Movie> callback) {
         String docId = userId + "_" + movieId;
         Movie movie = new Movie();
 
@@ -158,6 +161,10 @@ public class FirestoreUtil {
                                 movie.setPlot(json.getString("Plot"));
                                 movie.setPoster(json.getString("Poster"));
 
+                                synchronized (movie) {
+                                    callback.onCallback(movie);
+                                }
+
                             } catch(JSONException e) {
                                 throw new RuntimeException(e);
                             }
@@ -167,12 +174,10 @@ public class FirestoreUtil {
                     Log.w("FirestoreUtil", "Error getting favourite.", e);
                 });
 
-        return movie;
     }
 
-    public String getDesc(String userId, String movieId){
+    public void getDesc(String userId, String movieId, FirestoreCallback<String> callback){
         String docId = userId + "_" + movieId;
-        AtomicReference<String> description = new AtomicReference<>("");
 
         db.collection("favourites")
                 .document(docId)
@@ -182,14 +187,10 @@ public class FirestoreUtil {
                         Log.w("FirestoreUtil", "Error getting favourite.", task.getException());
                     }
 
-                    DocumentSnapshot document = task.getResult();
-                    description.set(document.getString("description"));
+                    callback.onCallback(task.getResult().getString("description"));
                 }).addOnFailureListener(e -> {
                     Log.w("FirestoreUtil", "Error getting favourite.", e);
                 });
-
-        return description.get();
-
     }
 
 

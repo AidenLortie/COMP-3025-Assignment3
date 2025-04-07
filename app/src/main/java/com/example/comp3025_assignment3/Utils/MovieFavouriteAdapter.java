@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp3025_assignment3.Models.Movie;
 import com.example.comp3025_assignment3.R;
+import com.example.comp3025_assignment3.Views.MovieFavouriteView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -41,17 +42,25 @@ public class MovieFavouriteAdapter extends RecyclerView.Adapter<MovieFavouriteVi
         Movie movie = movies.get(position);
         FirebaseAuth user = mAuth;
         String UID = user.getCurrentUser().getUid();
-        String description = fsUtil.getDesc(UID, movie.getImdbID());
 
 
 
+        fsUtil.getDesc(UID, movie.getImdbID(), new FirestoreCallback<String>() {
+            @Override
+            public void onCallback(String data) {
+                holder.description.setText(data);
+            }
+        });
         holder.title.setText(movie.getTitle());
-        holder.description.setText(description);
         ImageDownloader.loadImageFromUrl(holder.imageView, movie.getPoster());
     }
 
     @Override
     public int getItemCount() {
         return movies.size();
+    }
+
+    public void setClickListener(ItemClickListener listener) {
+        this.clickListener = listener;
     }
 }

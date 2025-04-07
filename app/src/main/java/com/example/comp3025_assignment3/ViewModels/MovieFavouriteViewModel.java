@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.comp3025_assignment3.Models.Movie;
+import com.example.comp3025_assignment3.Utils.FirestoreCallback;
 import com.example.comp3025_assignment3.Utils.FirestoreUtil;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,6 +21,13 @@ public class MovieFavouriteViewModel extends ViewModel {
 
     public MovieFavouriteViewModel() {
         FirestoreUtil fsUtil = new FirestoreUtil();
-        movieFavouritesResults.postValue(fsUtil.getFavourites(mAuth.getCurrentUser().getUid()));
+        String UID = mAuth.getCurrentUser().getUid();
+
+        fsUtil.getFavourites(UID, new FirestoreCallback<List<Movie>>() {
+            @Override
+            public void onCallback(List<Movie> data) {
+                movieFavouritesResults.postValue(data);
+            }
+        });
     }
 }

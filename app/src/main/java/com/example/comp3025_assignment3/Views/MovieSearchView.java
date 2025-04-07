@@ -56,6 +56,11 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
             }
         });
 
+        binding.toFavBtn.setOnClickListener(view -> {
+            Intent intObj = new Intent(this, MovieFavouriteView.class);
+            startActivity(intObj);
+        });
+
     }
 
 

@@ -32,6 +32,9 @@
         <activity
             android:name=".Views.MovieSearchView"
             android:exported="false" />
+        <activity
+            android:name=".Views.MovieFavouriteView"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp3025_assignment3.Models.Movie;
+import com.example.comp3025_assignment3.Utils.FirestoreUtil;
 import com.example.comp3025_assignment3.Utils.ImageDownloader;
 import com.example.comp3025_assignment3.ViewModels.MovieViewModel;
 import com.example.comp3025_assignment3.databinding.SearchDetailsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MovieView extends AppCompatActivity {
     Movie movie;
@@ -40,6 +42,10 @@ public class MovieView extends AppCompatActivity {
         binding.searchDetailsBack.setOnClickListener(view -> finish());
 
         //Change this to add to favs once set up
-        binding.add2FavBtn.setOnClickListener(view -> finish());
+        binding.add2FavBtn.setOnClickListener(view -> {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirestoreUtil fsUtil = new FirestoreUtil();
+            fsUtil.addFavourite(mAuth.getCurrentUser().getUid(), movieId);
+        });
     }
 }
