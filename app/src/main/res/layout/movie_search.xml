@@ -52,7 +52,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="511dp" />
+            android:layout_height="553dp" />
 
         <Button
             android:id="@+id/toFavBtn"
