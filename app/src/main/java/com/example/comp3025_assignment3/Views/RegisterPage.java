@@ -45,24 +45,22 @@ public class RegisterPage extends AppCompatActivity {
                     Toast.makeText(RegisterPage.this, "Email is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.length()<6) {//password must be atleast 6 chearacters long
-                    Toast.makeText(RegisterPage.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (password.isEmpty()) {//no passwored entered
                     Toast.makeText(RegisterPage.this, "Password is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {//see if eamil pattern is correct
+                    Toast.makeText(RegisterPage.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.length()<6) {//password must be atleast 6 chearacters long
+                    Toast.makeText(RegisterPage.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!password.equals(confirmPassword)) {//check if passwords are the same
                     Toast.makeText(RegisterPage.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {//see if eamil pattern is correct
-                    Toast.makeText(RegisterPage.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 registerUser(email, password);
             }
         });
