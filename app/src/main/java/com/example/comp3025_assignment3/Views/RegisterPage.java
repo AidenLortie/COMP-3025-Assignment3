@@ -3,6 +3,7 @@ package com.example.comp3025_assignment3.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +35,13 @@ public class RegisterPage extends AppCompatActivity {
             }
         });*/
 
+        binding.loginBtnRegister.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View view){
+               finish();
+           }
+        });
+
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +57,7 @@ public class RegisterPage extends AppCompatActivity {
                     Toast.makeText(RegisterPage.this, "Password is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {//see if eamil pattern is correct
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {//see if eamil pattern is correct
                     Toast.makeText(RegisterPage.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
