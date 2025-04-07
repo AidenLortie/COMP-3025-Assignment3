@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String logEmail = binding.emailLogin.getText().toString().trim();
-                String logPassword = binding.passwordLogin.getText().toString().trim();
+                String logPassword = binding.passwordToggle.getEditText().getText().toString().trim();
                 //singIn("test@testing.ca", "password");//for testing
                 Log.i("msg", logEmail); //for debugging
                 Log.i("msg", logPassword); //for debugging
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
     private  void singIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    Integer failedAttempts =0;
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //go back to main activity or fail message
@@ -60,14 +60,14 @@ public class Login extends AppCompatActivity {
                             Log.d("tag", "Login is a success");
                             FirebaseAuth user = mAuth;
 
-                            Toast.makeText(Login.this, "login Pass: "+user.getUid(), Toast.LENGTH_SHORT).show();
+                            Log.d("tag", "login Pass: "+user.getUid()); //log this for debugging since user does not need to see it
 
                             Intent intentObj = new Intent(getApplicationContext(), MovieSearchView.class);
                             startActivity(intentObj);
-                            finish();
-                        }else {
+                            finish();//so if user goes back without
+                        }else { //this should not happen as we take care of
                             Log.d("tag", "Login is a fail", task.getException());
-                            Toast.makeText(Login.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Authentication Failed, Please try again in a few minutes", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

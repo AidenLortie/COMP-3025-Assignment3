@@ -53,7 +53,7 @@ public class RegisterPage extends AppCompatActivity {
                     Toast.makeText(RegisterPage.this, "Email is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.isEmpty()) {//no passwored entered
+                if (password.isEmpty()) {//no password entered
                     Toast.makeText(RegisterPage.this, "Password is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -61,7 +61,7 @@ public class RegisterPage extends AppCompatActivity {
                     Toast.makeText(RegisterPage.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.length()<6) {//password must be atleast 6 chearacters long
+                if (password.length()<6) {//password must be at least 6 cheracters long
                     Toast.makeText(RegisterPage.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
