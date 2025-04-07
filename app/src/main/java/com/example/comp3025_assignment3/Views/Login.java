@@ -38,11 +38,13 @@ public class Login extends AppCompatActivity {
             }
         });
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
-            final String logEmail = String.valueOf(binding.emailLogin);
-            final String logPassword = String.valueOf(binding.passwordLogin);
             @Override
             public void onClick(View view) {
+                String logEmail = binding.emailLogin.getText().toString().trim();
+                String logPassword = binding.passwordLogin.getText().toString().trim();
                 //singIn("test@testing.ca", "password");//for testing
+                Log.i("msg", logEmail); //for debugging
+                Log.i("msg", logPassword); //for debugging
                 singIn(logEmail, logPassword);
             }
         });
@@ -50,6 +52,7 @@ public class Login extends AppCompatActivity {
     private  void singIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    Integer failedAttempts =0;
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //go back to main activity or fail message
@@ -59,10 +62,10 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this, "login Pass: "+user.getUid(), Toast.LENGTH_SHORT).show();
 
-                            Intent intentObj = new Intent(getApplicationContext(), Login.class);
+                            Intent intentObj = new Intent(getApplicationContext(), MovieSearchView.class);
                             startActivity(intentObj);
                             finish();
-                        }else{
+                        }else {
                             Log.d("tag", "Login is a fail", task.getException());
                             Toast.makeText(Login.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                         }

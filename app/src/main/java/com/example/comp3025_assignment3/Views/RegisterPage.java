@@ -3,6 +3,7 @@ package com.example.comp3025_assignment3.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,16 +34,46 @@ public class RegisterPage extends AppCompatActivity {
                 registerUser("test@testing.ca", "password");
             }
         });*/
-        String email = String.valueOf(binding.emailRegister);
-        String confirmPassword = String.valueOf(binding.passwordConfirm);
-        String password = String.valueOf(binding.passwordRegister);
+
+        binding.loginBtnRegister.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View view){
+               finish();
+           }
+        });
+
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = binding.emailRegister.getText().toString().trim();
+                String confirmPassword = binding.passwordConfirm.getText().toString().trim();
+                String password = binding.passwordRegister.getText().toString().trim();
+
+                if (email.isEmpty()) { //no email entered
+                    Toast.makeText(RegisterPage.this, "Email is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.isEmpty()) {//no passwored entered
+                    Toast.makeText(RegisterPage.this, "Password is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {//see if eamil pattern is correct
+                    Toast.makeText(RegisterPage.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.length()<6) {//password must be atleast 6 chearacters long
+                    Toast.makeText(RegisterPage.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!password.equals(confirmPassword)) {//check if passwords are the same
+                    Toast.makeText(RegisterPage.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 registerUser(email, password);
             }
         });
     }
+
     private void registerUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
