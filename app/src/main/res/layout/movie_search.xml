@@ -52,7 +52,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="511dp" />
+
+        <Button
+            android:id="@+id/toFavBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favourites" />
 
     </LinearLayout>
 
