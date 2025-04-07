@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 public class Movie {
     // Movie Class (Used by MovieView)
+    private String imdbID;
     private String title;
     private String year;
     private String rated;
@@ -20,6 +21,14 @@ public class Movie {
     @Override
     public String toString() {
         return "Summary: \n" + plot + "\nGenre: " + genre + "\nRated: " + rated;
+    }
+
+    public String getImdbID() {
+        return imdbID;
+    }
+
+    public void setImdbID(String imdbID) {
+        this.imdbID = imdbID;
     }
 
     public String getTitle() {
