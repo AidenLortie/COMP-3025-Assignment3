@@ -2,6 +2,7 @@ package com.example.comp3025_assignment3.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     ActivityLoginBinding binding;
@@ -36,9 +38,12 @@ public class Login extends AppCompatActivity {
             }
         });
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+            final String logEmail = String.valueOf(binding.emailLogin);
+            final String logPassword = String.valueOf(binding.passwordLogin);
             @Override
             public void onClick(View view) {
-                singIn("test@testing.ca", "password");
+                //singIn("test@testing.ca", "password");
+                singIn(logEmail, logPassword);
             }
         });
     }
@@ -47,11 +52,20 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //Add success or fail stattments
-                        Toast.makeText(Login.this, "Authencitcaion Pass", Toast.LENGTH_SHORT).show();
-                        Intent intentObj = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intentObj);
-                        finish();
+                        //go back to main activity or fail message
+                        if(task.isSuccessful()){
+                            Log.d("tag", "Login is a success");
+                            FirebaseAuth user = mAuth;
+
+                            Toast.makeText(Login.this, "login Pass: "+user.getUid(), Toast.LENGTH_SHORT).show();
+
+                            Intent intentObj = new Intent(getApplicationContext(), Login.class);
+                            startActivity(intentObj);
+                            finish();
+                        }else{
+                            Log.d("tag", "Login is a fail", task.getException());
+                            Toast.makeText(Login.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }

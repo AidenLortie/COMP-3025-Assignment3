@@ -3,6 +3,7 @@ package com.example.comp3025_assignment3.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,15 @@ public class RegisterPage extends AppCompatActivity {
                 registerUser("test@testing.ca", "password");
             }
         });*/
-
+        String email = String.valueOf(binding.emailRegister);
+        String confirmPassword = String.valueOf(binding.passwordConfirm);
+        String password = String.valueOf(binding.passwordRegister);
+        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerUser(email, password);
+            }
+        });
     }
     private void registerUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -40,6 +49,7 @@ public class RegisterPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //go back to main activity or fail message
+
                         if(task.isSuccessful()){
                             Log.d("tag", "createUserWithEmail is a success");
                             FirebaseUser user = mAuth.getCurrentUser();
