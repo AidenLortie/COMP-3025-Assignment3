@@ -38,11 +38,13 @@ public class Login extends AppCompatActivity {
             }
         });
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
-            final String logEmail = String.valueOf(binding.emailLogin);
-            final String logPassword = String.valueOf(binding.passwordLogin);
             @Override
             public void onClick(View view) {
+                String logEmail = binding.emailLogin.getText().toString().trim();
+                String logPassword = binding.passwordLogin.getText().toString().trim();
                 //singIn("test@testing.ca", "password");//for testing
+                Log.i("msg", logEmail);
+                Log.i("msg", logPassword);
                 singIn(logEmail, logPassword);
             }
         });
@@ -59,7 +61,7 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(Login.this, "login Pass: "+user.getUid(), Toast.LENGTH_SHORT).show();
 
-                            Intent intentObj = new Intent(getApplicationContext(), Login.class);
+                            Intent intentObj = new Intent(getApplicationContext(), MovieSearchView.class);
                             startActivity(intentObj);
                             finish();
                         }else{
