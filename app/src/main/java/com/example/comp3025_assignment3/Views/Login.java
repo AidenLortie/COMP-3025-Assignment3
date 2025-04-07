@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
             final String logPassword = String.valueOf(binding.passwordLogin);
             @Override
             public void onClick(View view) {
-                //singIn("test@testing.ca", "password");
+                //singIn("test@testing.ca", "password");//for testing
                 singIn(logEmail, logPassword);
             }
         });
