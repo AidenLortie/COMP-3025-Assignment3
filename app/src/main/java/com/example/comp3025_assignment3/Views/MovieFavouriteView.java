@@ -1,5 +1,6 @@
 package com.example.comp3025_assignment3.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -49,6 +50,12 @@ public class MovieFavouriteView extends AppCompatActivity implements ItemClickLi
 
     @Override
     public void onClick(View view, int pos) {
+        Movie movie = movies.get(pos);
+        String movieId = movie.getImdbID();
 
+        // Create an intent to start the MovieView activity
+        Intent intent = new Intent(this, FavouriteView.class);
+        intent.putExtra("MOVIE_ID", movieId);
+        startActivity(intent);
     }
 }

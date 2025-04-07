@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp3025_assignment3.Models.Movie;
+import com.example.comp3025_assignment3.Utils.FirestoreCallback;
+import com.example.comp3025_assignment3.Utils.FirestoreUtil;
 import com.example.comp3025_assignment3.Utils.ImageDownloader;
 import com.example.comp3025_assignment3.ViewModels.MovieViewModel;
 import com.example.comp3025_assignment3.databinding.FavoriteDetailsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class FavouriteView extends AppCompatActivity {
     Movie movie;
@@ -24,6 +27,10 @@ public class FavouriteView extends AppCompatActivity {
         Intent intObj = getIntent();
         movieId = intObj.getStringExtra("MOVIE_ID");
 
+
+        FirestoreUtil fsUtil = new FirestoreUtil();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         viewModel.GetMovie(movieId);
 
@@ -32,13 +39,32 @@ public class FavouriteView extends AppCompatActivity {
             ImageDownloader.loadImageFromUrl(binding.imageView2, movie.getPoster());
             binding.favoriteDetailsTitle.setText(movie.getTitle());
 
-            //details here i gues
+            fsUtil.getDesc(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<String>() {
+                @Override
+                public void onCallback(String data) {
+                    binding.favoriteDetailsDescription.setText(data);
+                }
+            });
         });
 
         binding.favoriteDetailsBack.setOnClickListener(view -> finish());
 
-        binding.favoriteDetailsDelete.setOnClickListener(view -> finish());
+        binding.favoriteDetailsDelete.setOnClickListener(view -> {
+            fsUtil.deleteFavourite(mAuth.getCurrentUser().getUid(), movieId);
 
-        binding.favoriteDetailsDelete.setOnClickListener(view -> finish());
+            finish();
+        });
+
+        binding.favoriteDetailsUpdate.setOnClickListener(view -> {
+
+            fsUtil.updateFavouriteDescription(mAuth.getCurrentUser().getUid(), movieId, binding.cronch.getText().toString());
+
+            fsUtil.getDesc(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<String>() {
+                @Override
+                public void onCallback(String data) {
+                    binding.favoriteDetailsDescription.setText(data);
+                }
+            });
+        });
     }
 }
