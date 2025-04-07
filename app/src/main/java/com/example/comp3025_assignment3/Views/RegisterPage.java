@@ -67,6 +67,7 @@ public class RegisterPage extends AppCompatActivity {
             }
         });
     }
+
     private void registerUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
