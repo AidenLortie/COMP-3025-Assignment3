@@ -81,6 +81,7 @@
         android:layout_width="214dp"
         android:layout_height="60dp"
         android:hint="Enter Password"
+        android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,10 +94,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_toggle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="217dp"
+            android:layout_height="66dp"
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

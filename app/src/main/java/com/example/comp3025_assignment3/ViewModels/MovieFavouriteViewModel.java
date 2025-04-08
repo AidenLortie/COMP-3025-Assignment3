@@ -15,12 +15,24 @@ public class MovieFavouriteViewModel extends ViewModel {
     private final MutableLiveData<List<Movie>> movieFavouritesResults = new MutableLiveData<>();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+    FirestoreUtil fsUtil = new FirestoreUtil();
+
     public LiveData<List<Movie>> getMovieFavouriteResults() {
         return movieFavouritesResults;
     }
 
     public MovieFavouriteViewModel() {
-        FirestoreUtil fsUtil = new FirestoreUtil();
+        String UID = mAuth.getCurrentUser().getUid();
+
+        fsUtil.getFavourites(UID, new FirestoreCallback<List<Movie>>() {
+            @Override
+            public void onCallback(List<Movie> data) {
+                movieFavouritesResults.postValue(data);
+            }
+        });
+    }
+
+    public void refreshData() {
         String UID = mAuth.getCurrentUser().getUid();
 
         fsUtil.getFavourites(UID, new FirestoreCallback<List<Movie>>() {
