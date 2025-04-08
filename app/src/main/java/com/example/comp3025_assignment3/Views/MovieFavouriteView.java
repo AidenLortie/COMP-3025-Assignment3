@@ -21,7 +21,6 @@ public class MovieFavouriteView extends AppCompatActivity implements ItemClickLi
     List<Movie> movies;
     MovieFavouriteListBinding binding;
     MovieFavouriteAdapter adapter;
-    RecyclerView recycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,14 @@ public class MovieFavouriteView extends AppCompatActivity implements ItemClickLi
         binding.toSrchBtn.setOnClickListener(view -> {
             finish();
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        MovieFavouriteViewModel viewModel = new ViewModelProvider(this).get(MovieFavouriteViewModel.class);
+        viewModel.refreshData();
     }
 
 

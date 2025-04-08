@@ -24,7 +24,6 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
     List<MovieSearch> movies;
     MovieSearchBinding binding;
     MovieSearchAdapter adapter;
-    RecyclerView recycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
