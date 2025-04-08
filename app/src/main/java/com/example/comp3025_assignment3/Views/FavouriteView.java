@@ -1,6 +1,7 @@
 package com.example.comp3025_assignment3.Views;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,19 +22,23 @@ public class FavouriteView extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        //setting binding
         binding = FavoriteDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //getting id through intents
         Intent intObj = getIntent();
         movieId = intObj.getStringExtra("MOVIE_ID");
 
-
+        //firestore connection
         FirestoreUtil fsUtil = new FirestoreUtil();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        //getting view model fro info
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         viewModel.GetMovie(movieId);
 
+        //setting xml with info from both firesotre and omdb
         viewModel.getMovieData().observe(this, result -> {
             movie = result;
             ImageDownloader.loadImageFromUrl(binding.imageView2, movie.getPoster());
@@ -47,16 +52,20 @@ public class FavouriteView extends AppCompatActivity {
             });
         });
 
+        //back button
         binding.favoriteDetailsBack.setOnClickListener(view -> finish());
 
+        //delete from favourite button
         binding.favoriteDetailsDelete.setOnClickListener(view -> {
             fsUtil.deleteFavourite(mAuth.getCurrentUser().getUid(), movieId);
 
             finish();
         });
 
+        //update description button
         binding.favoriteDetailsUpdate.setOnClickListener(view -> {
-
+            //toast to let the user know the description was updated
+            Toast.makeText(this, "Updated Description!",Toast.LENGTH_SHORT).show();
             fsUtil.updateFavouriteDescription(mAuth.getCurrentUser().getUid(), movieId, binding.cronch.getText().toString());
 
             fsUtil.getDesc(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<String>() {

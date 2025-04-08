@@ -25,6 +25,7 @@ public class MovieViewModel extends ViewModel {
         return movieData;
     }
 
+    //setting GetMovie
     public void GetMovie(String movieId){
         // Define the callback for the API request
         APIUtil.getMovie(movieId, new Callback() {
