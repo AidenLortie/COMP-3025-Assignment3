@@ -8,58 +8,60 @@
     android:background="@color/black"
     tools:context=".Views.MovieSearchView">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="133dp"
+        android:layout_height="61dp"
+        android:layout_weight="1"
+        android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
 
-        <LinearLayout
-            android:id="@+id/horizScroll"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp">
+    <EditText
+        android:id="@+id/txtSearch"
+        android:layout_width="254dp"
+        android:layout_height="61dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/search_a_movie"
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/white"
+        android:textColorHint="@color/material_dynamic_neutral90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
 
-            <EditText
-                android:id="@+id/txtSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Search a movie"
-                android:inputType="text"
-                android:text=""
-                android:textColor="@color/white"
-                android:textColorHint="@color/material_dynamic_neutral90" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="406dp"
+        android:layout_height="726dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Search" />
+    <Button
+        android:id="@+id/toFavBtn"
+        android:layout_width="377dp"
+        android:layout_height="43dp"
+        android:text="@string/favourites"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="521dp" />
-
-        <Button
-            android:id="@+id/toFavBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Favourites" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

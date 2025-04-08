@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">COMP3025-Assignment3</string>
+    <string name="search">Search</string>
+    <string name="favourites">Favourites</string>
+    <string name="search_a_movie">Search a movie</string>
 </resources>

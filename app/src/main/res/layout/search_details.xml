@@ -3,162 +3,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        android:orientation="vertical"
+
+    <TextView
+        android:id="@+id/searchDetailsTitle"
+        android:layout_width="335dp"
+        android:layout_height="73dp"
+        android:fontFamily="cursive"
+        android:text="Title"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.527" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="65dp" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="362dp"
+        android:layout_height="441dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/searchDetailsPlot"
+        android:layout_width="363dp"
+        android:layout_height="136dp"
+        android:text="Plot"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.813" />
 
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+    <Button
+        android:id="@+id/add2FavBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Favorites"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="154dp"
-                android:layout_height="182dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+    <TextView
+        android:id="@+id/searchDetailsYear"
+        android:layout_width="149dp"
+        android:layout_height="35dp"
+        android:text="Year"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
 
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+    <TextView
+        android:id="@+id/searchDetailsRating"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63" />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/searchDetailsGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/searchDetailsBack"
+        android:layout_width="152dp"
+        android:layout_height="47dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 
-            <LinearLayout
-                android:layout_width="601dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/searchDetailsTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Title"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="34sp" />
-
-                <TextView
-                    android:id="@+id/searchDetailsYear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Year"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="77dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <Space
-                android:layout_width="92dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/searchDetailsRating"
-                android:layout_width="89dp"
-                android:layout_height="wrap_content"
-                android:text="Rating"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/searchDetailsGenre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Genre"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/searchDetailsPlot"
-            android:layout_width="match_parent"
-            android:layout_height="166dp"
-            android:text="Plot"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/searchDetailsBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Back" />
-
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/add2FavBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add to Favorites" />
-
-            <Space
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
