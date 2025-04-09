@@ -20,6 +20,7 @@ public class MovieSearchViewHolder extends RecyclerView.ViewHolder {
     public MovieSearchViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
         super(itemView);
 
+        // Initialize the views
         imageView = itemView.findViewById(R.id.MS_imageview);
         title = itemView.findViewById(R.id.MS_title_txt);
         description = itemView.findViewById(R.id.MS_description_text);

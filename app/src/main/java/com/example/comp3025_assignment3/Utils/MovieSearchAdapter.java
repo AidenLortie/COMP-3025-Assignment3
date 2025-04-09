@@ -40,6 +40,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchViewHold
     public void onBindViewHolder(@NonNull MovieSearchViewHolder holder, int position) {
         MovieSearch movie = movies.get(position);
 
+        // Set the title and image of the movie
         holder.title.setText(movie.getTitle());
         holder.description.setText(movie.getYear());
         ImageDownloader.loadImageFromUrl(holder.imageView, movie.getPoster());

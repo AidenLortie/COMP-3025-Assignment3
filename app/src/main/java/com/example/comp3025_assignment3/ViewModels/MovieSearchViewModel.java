@@ -31,6 +31,7 @@ public class MovieSearchViewModel extends ViewModel {
         return movieSearchResults;
     }
 
+    // Method to search for movies using the API
     public void searchMovies(String query) {
 
         APIUtil.getMovies(query, new Callback() {
@@ -41,16 +42,21 @@ public class MovieSearchViewModel extends ViewModel {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                // Check if the response is successful
                 assert response.body() != null;
 
+                // Check if the response is successful
                 String responseData = response.body().string();
 
                 try {
+                    // Parse the JSON response
                     JSONObject json = new JSONObject(responseData);
                     if(json.has("Search")) {
+                        // Check if the "Search" key exists in the JSON response
                         JSONArray resultsArray = json.getJSONArray("Search");
                         List<MovieSearch> searchResults = new ArrayList<>();
                         for (int i = 0; i < resultsArray.length(); i++) {
+                            // Create a MovieSearch object for each item in the results array
                             JSONObject item = resultsArray.getJSONObject(i);
                             MovieSearch movie = new MovieSearch();
                             movie.setTitle(item.getString("Title"));
@@ -62,6 +68,7 @@ public class MovieSearchViewModel extends ViewModel {
                             searchResults.add(movie);
                         }
 
+                        // Post the search results to the LiveData object
                         movieSearchResults.postValue(searchResults);
                     } else {
                         // Handle case where no search results are found

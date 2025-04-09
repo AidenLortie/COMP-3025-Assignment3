@@ -50,6 +50,7 @@ public class MovieFavouriteView extends AppCompatActivity implements ItemClickLi
     public void onResume(){
         super.onResume();
 
+        // Refresh the data when the activity is resumed (e.g., after returning from the FavouriteView activity)
         MovieFavouriteViewModel viewModel = new ViewModelProvider(this).get(MovieFavouriteViewModel.class);
         viewModel.refreshData();
     }

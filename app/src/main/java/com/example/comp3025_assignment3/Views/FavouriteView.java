@@ -66,14 +66,11 @@ public class FavouriteView extends AppCompatActivity {
         binding.favoriteDetailsUpdate.setOnClickListener(view -> {
             //toast to let the user know the description was updated
             Toast.makeText(this, "Updated Description!",Toast.LENGTH_SHORT).show();
+            //update the description in Firestore
             fsUtil.updateFavouriteDescription(mAuth.getCurrentUser().getUid(), movieId, binding.cronch.getText().toString());
 
-            fsUtil.getDesc(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<String>() {
-                @Override
-                public void onCallback(String data) {
-                    binding.favoriteDetailsDescription.setText(data);
-                }
-            });
+            //set the description in the TextView
+            binding.favoriteDetailsDescription.setText(binding.cronch.getText().toString());
         });
     }
 }

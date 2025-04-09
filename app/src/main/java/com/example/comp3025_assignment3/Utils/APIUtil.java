@@ -7,11 +7,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class APIUtil {
-
+    // OkHttpClient instance
     private static final OkHttpClient client = new OkHttpClient();
 
-    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-
+    // Base URL for the OMDB API
     private static final String baseUrl = "https://omdbapi.com/?apikey=a3dbd1e7&type=movie";
 
     // getMovies - used durring search to get list of movies

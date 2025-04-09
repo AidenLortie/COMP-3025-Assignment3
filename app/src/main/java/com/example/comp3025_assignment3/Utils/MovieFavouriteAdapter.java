@@ -39,18 +39,21 @@ public class MovieFavouriteAdapter extends RecyclerView.Adapter<MovieFavouriteVi
     public void onBindViewHolder(@NonNull MovieFavouriteViewHolder holder, int position) {
         FirestoreUtil fsUtil = new FirestoreUtil();
 
+        // Get the movie at the current position
         Movie movie = movies.get(position);
+
         FirebaseAuth user = mAuth;
         String UID = user.getCurrentUser().getUid();
 
-
-
+        // Get the description of the movie from Firestore
         fsUtil.getDesc(UID, movie.getImdbID(), new FirestoreCallback<String>() {
             @Override
             public void onCallback(String data) {
                 holder.description.setText(data);
             }
         });
+
+        // Set the title and image of the movie
         holder.title.setText(movie.getTitle());
         ImageDownloader.loadImageFromUrl(holder.imageView, movie.getPoster());
     }

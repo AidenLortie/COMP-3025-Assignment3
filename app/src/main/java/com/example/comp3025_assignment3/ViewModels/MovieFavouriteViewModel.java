@@ -21,6 +21,7 @@ public class MovieFavouriteViewModel extends ViewModel {
         return movieFavouritesResults;
     }
 
+    // Constructor to initialize the ViewModel
     public MovieFavouriteViewModel() {
         String UID = mAuth.getCurrentUser().getUid();
 
@@ -32,6 +33,7 @@ public class MovieFavouriteViewModel extends ViewModel {
         });
     }
 
+    // Method to refresh the data
     public void refreshData() {
         String UID = mAuth.getCurrentUser().getUid();
 

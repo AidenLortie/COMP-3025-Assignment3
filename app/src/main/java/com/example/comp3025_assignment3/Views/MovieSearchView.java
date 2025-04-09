@@ -29,14 +29,18 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //setting binding
         binding = MovieSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //setting up recycler view
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.recycler.setLayoutManager(layoutManager);
 
+        //setting up view model
         MovieSearchViewModel viewModel = new ViewModelProvider(this).get(MovieSearchViewModel.class);
 
+        //setting up recycler view adapter
         viewModel.getMovieSearchResults().observe(this, searchResults -> {
             movies = searchResults;
             adapter = new MovieSearchAdapter(this, movies);
@@ -44,6 +48,7 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
             binding.recycler.setAdapter(adapter);
         });
 
+        //setting up search button
         binding.button.setOnClickListener(view -> {
             String search = binding.txtSearch.getText().toString();
 
@@ -55,6 +60,7 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
             }
         });
 
+        //setting up recycler view
         binding.toFavBtn.setOnClickListener(view -> {
             Intent intObj = new Intent(this, MovieFavouriteView.class);
             startActivity(intObj);
@@ -65,6 +71,7 @@ public class MovieSearchView extends AppCompatActivity implements ItemClickListe
 
     @Override
     public void onClick(View view, int pos) {
+        // Create an intent to start the MovieView activity
         Intent intObj = new Intent(this, MovieView.class);
         intObj.putExtra("MOVIE_ID", movies.get(pos).getImdbID());
         startActivity(intObj);

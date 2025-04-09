@@ -54,6 +54,7 @@ public class MovieView extends AppCompatActivity {
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirestoreUtil fsUtil = new FirestoreUtil();
+            //adding to firestore
             fsUtil.addFavourite(mAuth.getCurrentUser().getUid(), movieId);
         });
     }
