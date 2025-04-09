@@ -22,7 +22,7 @@
         android:id="@+id/favoriteDetailsDescription"
         android:layout_width="386dp"
         android:layout_height="128dp"
-        android:text="Description"
+        android:text="No Description Added"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"

@@ -47,7 +47,12 @@ public class FavouriteView extends AppCompatActivity {
             fsUtil.getDesc(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<String>() {
                 @Override
                 public void onCallback(String data) {
-                    binding.favoriteDetailsDescription.setText(data);
+                    if (data == null){
+                        binding.favoriteDetailsDescription.setText("Please Enter a Description!");
+                    }
+                    else {
+                        binding.favoriteDetailsDescription.setText(data);
+                    }
                 }
             });
         });
