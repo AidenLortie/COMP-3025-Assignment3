@@ -49,7 +49,12 @@ public class MovieFavouriteAdapter extends RecyclerView.Adapter<MovieFavouriteVi
         fsUtil.getDesc(UID, movie.getImdbID(), new FirestoreCallback<String>() {
             @Override
             public void onCallback(String data) {
-                holder.description.setText(data);
+                if(data == null){
+                    holder.description.setText("No Description");
+                }
+                else{
+                    holder.description.setText(data);
+                }
             }
         });
 
