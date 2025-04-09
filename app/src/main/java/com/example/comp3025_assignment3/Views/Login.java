@@ -42,10 +42,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String logEmail = binding.emailLogin.getText().toString().trim();
                 String logPassword = binding.passwordToggle.getEditText().getText().toString().trim();
-                singIn("test@testing.ca", "password");//for testing
+                //singIn("test@testing.ca", "password");//for testing
                 Log.i("msg", logEmail); //for debugging
                 Log.i("msg", logPassword); //for debugging
-                //singIn(logEmail, logPassword);
+                singIn(logEmail, logPassword);
             }
         });
     }
