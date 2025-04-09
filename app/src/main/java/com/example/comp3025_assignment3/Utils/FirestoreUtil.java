@@ -166,50 +166,51 @@ public class FirestoreUtil {
                 .get()
                 .addOnCompleteListener(task -> {
                     // Check if the task was successful
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         Log.w("FirestoreUtil", "Error getting favourite.", task.getException());
-                    }
+                    } else {
 
-                    // Get the document from the result
-                    DocumentSnapshot document = task.getResult();
+                        // Get the document from the result
+                        DocumentSnapshot document = task.getResult();
 
-                    // Get the movieId from the document to fetch movie details
-                    APIUtil.getMovie(document.getString("movieId"), new Callback() {
-                        @Override
-                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                            Log.e("FirestoreUtil", "Error getting movie details: " + e.getMessage());
-                        }
-
-                        @Override
-                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                            // ensure response body is not null
-                            assert response.body() != null;
-                            // parse the response
-                            String responseData = response.body().string();
-                            // Create a JSON object from the response
-                            JSONObject json = null;
-                            try{
-                                // parse JSON response
-                                json = new JSONObject(responseData);
-                                movie.setImdbID(json.getString("imdbID"));
-                                movie.setTitle(json.getString("Title"));
-                                movie.setYear(json.getString("Year"));
-                                movie.setRated(json.getString("Rated"));
-                                movie.setReleased(json.getString("Released"));
-                                movie.setGenre(json.getString("Genre"));
-                                movie.setPlot(json.getString("Plot"));
-                                movie.setPoster(json.getString("Poster"));
-
-                                // Call the callback with the movie
-                                synchronized (movie) {
-                                    callback.onCallback(movie);
-                                }
-
-                            } catch(JSONException e) {
-                                throw new RuntimeException(e);
+                        // Get the movieId from the document to fetch movie details
+                        APIUtil.getMovie(document.getString("movieId"), new Callback() {
+                            @Override
+                            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                                Log.e("FirestoreUtil", "Error getting movie details: " + e.getMessage());
                             }
-                        }
-                    });
+
+                            @Override
+                            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                                // ensure response body is not null
+                                assert response.body() != null;
+                                // parse the response
+                                String responseData = response.body().string();
+                                // Create a JSON object from the response
+                                JSONObject json = null;
+                                try {
+                                    // parse JSON response
+                                    json = new JSONObject(responseData);
+                                    movie.setImdbID(json.getString("imdbID"));
+                                    movie.setTitle(json.getString("Title"));
+                                    movie.setYear(json.getString("Year"));
+                                    movie.setRated(json.getString("Rated"));
+                                    movie.setReleased(json.getString("Released"));
+                                    movie.setGenre(json.getString("Genre"));
+                                    movie.setPlot(json.getString("Plot"));
+                                    movie.setPoster(json.getString("Poster"));
+
+                                    // Call the callback with the movie
+                                    synchronized (movie) {
+                                        callback.onCallback(movie);
+                                    }
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        });
+                    }
                 }).addOnFailureListener(e -> {
                     Log.w("FirestoreUtil", "Error getting favourite.", e);
                 });

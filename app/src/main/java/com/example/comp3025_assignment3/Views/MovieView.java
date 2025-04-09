@@ -1,12 +1,14 @@
 package com.example.comp3025_assignment3.Views;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp3025_assignment3.Models.Movie;
+import com.example.comp3025_assignment3.Utils.FirestoreCallback;
 import com.example.comp3025_assignment3.Utils.FirestoreUtil;
 import com.example.comp3025_assignment3.Utils.ImageDownloader;
 import com.example.comp3025_assignment3.ViewModels.MovieViewModel;
@@ -17,6 +19,10 @@ public class MovieView extends AppCompatActivity {
     Movie movie;
     String movieId;
     SearchDetailsBinding binding;
+
+    FirestoreUtil fsUtil = new FirestoreUtil();
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onStart(){
@@ -52,10 +58,37 @@ public class MovieView extends AppCompatActivity {
             //toast to let them know it has been added
             Toast.makeText(this, "Added to Favourites!",Toast.LENGTH_SHORT).show();
 
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirestoreUtil fsUtil = new FirestoreUtil();
             //adding to firestore
             fsUtil.addFavourite(mAuth.getCurrentUser().getUid(), movieId);
+
+            //disabling the button
+            binding.add2FavBtn.setEnabled(false);
+            binding.add2FavBtn.setText("Already in Favourites");
         });
+
+        // Check if the movie is already in the favourites
+
+        fsUtil.getFavourite(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<Movie>() {
+            @Override
+            public void onCallback(Movie data) {
+                if(data != null){
+                    // If the movie is already in the favourites, disable the button
+
+                    // Call main thread to update the UI
+                    runOnUiThread(() -> {
+                        binding.add2FavBtn.setEnabled(false);
+                        binding.add2FavBtn.setText("Already in Favourites");
+                    });
+                } else {
+                    // If the movie is not in the favourites, enable the button
+                    runOnUiThread(() -> {
+                        binding.add2FavBtn.setEnabled(true);
+                        binding.add2FavBtn.setText("Add to Favourites");
+                    });
+                }
+            }
+        });
+
+
     }
 }
