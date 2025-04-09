@@ -239,5 +239,29 @@ public class FirestoreUtil {
                 });
     }
 
+    public void isFavourited(String userId, String movieId, FirestoreCallback<Boolean> callback) {
+        // Get the document ID (From the userId and movieId)
+        String docId = userId + "_" + movieId;
+
+        // Get the favourite movie from Firestore
+        db.collection("favourites")
+                .document(docId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(!task.isSuccessful()){
+                        Log.w("FirestoreUtil", "Error getting favourite.", task.getException());
+                    }
+
+                    // Check if the document exists
+                    boolean isFavourited = task.getResult().exists();
+
+                    synchronized (task.getResult()) {
+                        callback.onCallback(isFavourited);
+                    }
+                }).addOnFailureListener(e -> {
+                    Log.w("FirestoreUtil", "Error getting favourite.", e);
+                });
+    }
+
 
 }

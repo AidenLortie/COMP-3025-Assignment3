@@ -68,23 +68,15 @@ public class MovieView extends AppCompatActivity {
 
         // Check if the movie is already in the favourites
 
-        fsUtil.getFavourite(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<Movie>() {
+        fsUtil.isFavourited(mAuth.getCurrentUser().getUid(), movieId, new FirestoreCallback<Boolean>() {
             @Override
-            public void onCallback(Movie data) {
-                if(data != null){
-                    // If the movie is already in the favourites, disable the button
-
-                    // Call main thread to update the UI
-                    runOnUiThread(() -> {
-                        binding.add2FavBtn.setEnabled(false);
-                        binding.add2FavBtn.setText("Already in Favourites");
-                    });
-                } else {
-                    // If the movie is not in the favourites, enable the button
-                    runOnUiThread(() -> {
-                        binding.add2FavBtn.setEnabled(true);
-                        binding.add2FavBtn.setText("Add to Favourites");
-                    });
+            public void onCallback(Boolean data) {
+                if(data){
+                    binding.add2FavBtn.setEnabled(false);
+                    binding.add2FavBtn.setText("Already in Favourites");
+                }else{
+                    binding.add2FavBtn.setEnabled(true);
+                    binding.add2FavBtn.setText("Add to Favourites");
                 }
             }
         });
